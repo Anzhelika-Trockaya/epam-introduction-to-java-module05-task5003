@@ -12,17 +12,19 @@ public class Calendar {
 
     private final TreeSet<Date> dates;
 
-    public Calendar(){
-        dates=new TreeSet<>(Date::compareTo);
+    public Calendar() {
+        dates = new TreeSet<>(Date::compareTo);
     }
 
-    public void addDate(LocalDate date){
+    public void addDate(LocalDate date) {
         dates.add(new Date(date));
     }
-    public void addDate(LocalDate date, String nameOfHoliday){
+
+    public void addDate(LocalDate date, String nameOfHoliday) {
         dates.add(new Date(date, nameOfHoliday));
     }
-    public void deleteDate(LocalDate date){
+
+    public void deleteDate(LocalDate date) {
         for (Date currentDate : dates) {
             if (currentDate.date.equals(date)) {
                 dates.remove(currentDate);
@@ -31,7 +33,7 @@ public class Calendar {
         }
     }
 
-    public void deleteDate(String nameOfHoliday){
+    public void deleteDate(String nameOfHoliday) {
         for (Date currentDate : dates) {
             if (currentDate.nameOfHoliday.equals(nameOfHoliday)) {
                 dates.remove(currentDate);
@@ -39,8 +41,9 @@ public class Calendar {
             }
         }
     }
-    public void printDates(){
-        for(Date date: dates){
+
+    public void printDates() {
+        for (Date date : dates) {
             System.out.println(date);
         }
     }
@@ -50,29 +53,33 @@ public class Calendar {
         private String nameOfHoliday;
         private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
 
-        public Date(LocalDate date){
-            this.date=date;
+        public Date(LocalDate date) {
+            this.date = date;
         }
-        public Date(LocalDate date, String nameOfHoliday){
-            this.date=date;
-            this.nameOfHoliday=nameOfHoliday;
+
+        public Date(LocalDate date, String nameOfHoliday) {
+            this.date = date;
+            this.nameOfHoliday = nameOfHoliday;
         }
-        public String toString(){
+
+        public String toString() {
             String result = formatter.format(date);
-            if(nameOfHoliday!=null){
-                result+=" - "+nameOfHoliday;
-            } else{
-                result+=" - day off";
+            if (nameOfHoliday != null) {
+                result += " - " + nameOfHoliday;
+            } else {
+                result += " - day off";
             }
             return result;
         }
 
-         public int compareTo(Date other){
-            if(this.date.isBefore(other.date)){
+        public int compareTo(Date other) {
+            if (this.date.isBefore(other.date)) {
                 return -1;
-            } else if(this.date.isAfter(other.date)){
+            } else if (this.date.isAfter(other.date)) {
                 return 1;
-            } else return 0;
-         }
+            } else {
+                return 0;
+            }
+        }
     }
 }
