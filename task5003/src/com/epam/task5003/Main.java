@@ -8,18 +8,26 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        Calendar myCalendar = new Calendar();
-        myCalendar.addDate(LocalDate.of(2021,3,8), "Woman Day");
-        myCalendar.addDate(LocalDate.of(2021,1,1), "New Year");
-        myCalendar.addDate(LocalDate.of(2021,12,25),"Christmas");
-        myCalendar.addDate(LocalDate.of(2021,4,1),"1 April");
+        Calendar myCalendar;
+        CalendarLogic logic;
+        CalendarView view;
 
-        myCalendar.printDates();
+        myCalendar = new Calendar();
+        logic = new CalendarLogic(myCalendar);
+        view=new CalendarView(myCalendar);
+
+        logic.addDate(LocalDate.of(2021,3,8), "Woman Day");
+        logic.addDate(LocalDate.of(2021,1,1), "New Year");
+        logic.addDate(LocalDate.of(2021,12,25),"Christmas");
+        logic.addDate(LocalDate.of(2021,4,1),"1 April");
+
+        view.printDates();
         System.out.println();
 
-        myCalendar.deleteDate(LocalDate.of(2021,3,8));
-        myCalendar.deleteDate("1 April");
-        myCalendar.addDate(LocalDate.of(2021,4,25));
-        myCalendar.printDates();
+        logic.deleteDate(LocalDate.of(2021,3,8));
+        logic.deleteDate("1 April");
+        logic.addDate(LocalDate.of(2021,4,25));
+
+        view.printDates();
     }
 }

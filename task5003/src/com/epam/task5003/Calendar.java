@@ -6,55 +6,70 @@ package com.epam.task5003;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
+import java.util.Set;
 import java.util.TreeSet;
 
 public class Calendar {
 
-    private final TreeSet<Date> dates;
+    private Set<Date> dates;
 
     public Calendar() {
-        dates = new TreeSet<>(Date::compareTo);
+        dates = new TreeSet<>();
     }
 
-    public void addDate(LocalDate date) {
-        dates.add(new Date(date));
-    }
-
-    public void addDate(LocalDate date, String nameOfHoliday) {
-        dates.add(new Date(date, nameOfHoliday));
-    }
-
-    public void deleteDate(LocalDate date) {
-        for (Date currentDate : dates) {
-            if (currentDate.date.equals(date)) {
-                dates.remove(currentDate);
-                break;
-            }
+    public Calendar(Set<Date> dates) {
+        if (dates != null) {
+            this.dates = dates;
+        } else {
+            this.dates = new TreeSet<>();
         }
     }
 
-    public void deleteDate(String nameOfHoliday) {
-        for (Date currentDate : dates) {
-            if (currentDate.nameOfHoliday.equals(nameOfHoliday)) {
-                dates.remove(currentDate);
-                break;
-            }
+    public Set<Date> getDates() {
+        return dates;
+    }
+
+    public void setDates(Set<Date> dates) {
+        if (dates != null) {
+            this.dates = dates;
+        } else {
+            this.dates = new TreeSet<>();
         }
     }
 
-    public void printDates() {
-        for (Date date : dates) {
-            System.out.println(date);
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Calendar)) return false;
+        Calendar calendar = (Calendar) o;
+        return Objects.equals(dates, calendar.dates);
     }
 
-    private class Date {
-        private final LocalDate date;
+    @Override
+    public int hashCode() {
+        return Objects.hash(dates);
+    }
+
+    @Override
+    public String toString() {
+        return "Calendar{" +
+                "dates=" + dates +
+                '}';
+    }
+
+    public static class Date implements Comparable<Date> {
+        private LocalDate date;
         private String nameOfHoliday;
-        private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+
+        public Date() {
+            this.date = LocalDate.now();
+            this.nameOfHoliday = "day off";
+        }
 
         public Date(LocalDate date) {
             this.date = date;
+            this.nameOfHoliday = "day off";
         }
 
         public Date(LocalDate date, String nameOfHoliday) {
@@ -62,16 +77,27 @@ public class Calendar {
             this.nameOfHoliday = nameOfHoliday;
         }
 
-        public String toString() {
-            String result = formatter.format(date);
-            if (nameOfHoliday != null) {
-                result += " - " + nameOfHoliday;
-            } else {
-                result += " - day off";
-            }
-            return result;
+        public LocalDate getDate() {
+            return date;
         }
 
+        public void setDate(LocalDate date) {
+            this.date = date;
+        }
+
+        public String getNameOfHoliday() {
+            return nameOfHoliday;
+        }
+
+        public void setNameOfHoliday(String nameOfHoliday) {
+            if (nameOfHoliday != null) {
+                this.nameOfHoliday = nameOfHoliday;
+            } else {
+                this.nameOfHoliday = "";
+            }
+        }
+
+        @Override
         public int compareTo(Date other) {
             if (this.date.isBefore(other.date)) {
                 return -1;
@@ -80,6 +106,28 @@ public class Calendar {
             } else {
                 return 0;
             }
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Date)) return false;
+            Date date1 = (Date) o;
+            return Objects.equals(date, date1.date) &&
+                    Objects.equals(nameOfHoliday, date1.nameOfHoliday);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(date, nameOfHoliday);
+        }
+
+        @Override
+        public String toString() {
+            return "Date{" +
+                    "date=" + date +
+                    ", nameOfHoliday='" + nameOfHoliday + '\'' +
+                    '}';
         }
     }
 }
