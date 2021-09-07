@@ -4,13 +4,13 @@ package com.epam.task5003;
 ////Создать класс Календарь с внутренним классом, с помощью объектов которого можно хранить информацию о
 ////выходных и праздничных днях.
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Calendar {
+public class Calendar implements Serializable {
 
     private Set<Date> dates;
 
@@ -58,7 +58,7 @@ public class Calendar {
                 '}';
     }
 
-    public static class Date implements Comparable<Date> {
+    public static class Date implements Comparable<Date>, Serializable {
         private LocalDate date;
         private String nameOfHoliday;
 

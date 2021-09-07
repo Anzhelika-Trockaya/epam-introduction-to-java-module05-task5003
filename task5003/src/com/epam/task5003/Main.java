@@ -14,19 +14,19 @@ public class Main {
 
         myCalendar = new Calendar();
         logic = new CalendarLogic(myCalendar);
-        view=new CalendarView(myCalendar);
+        view = new CalendarView(myCalendar);
 
-        logic.addDate(LocalDate.of(2021,3,8), "Woman Day");
-        logic.addDate(LocalDate.of(2021,1,1), "New Year");
-        logic.addDate(LocalDate.of(2021,12,25),"Christmas");
-        logic.addDate(LocalDate.of(2021,4,1),"1 April");
+        logic.addDate(LocalDate.of(2021, 3, 8), "Woman Day");
+        logic.addDate(LocalDate.of(2021, 1, 1), "New Year");
+        logic.addDate(LocalDate.of(2021, 12, 25), "Christmas");
+        logic.addDate(LocalDate.of(2021, 4, 1), "1 April");
 
         view.printDates();
         System.out.println();
 
-        logic.deleteDate(LocalDate.of(2021,3,8));
+        logic.deleteDate(LocalDate.of(2021, 3, 8));
         logic.deleteDate("1 April");
-        logic.addDate(LocalDate.of(2021,4,25));
+        logic.addDate(LocalDate.of(2021, 4, 25));
 
         view.printDates();
     }
