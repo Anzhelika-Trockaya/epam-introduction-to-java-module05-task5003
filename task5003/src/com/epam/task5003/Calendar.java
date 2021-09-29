@@ -53,7 +53,7 @@ public class Calendar implements Serializable {
 
     @Override
     public String toString() {
-        return "Calendar{" +
+        return getClass().getSimpleName() + "{" +
                 "dates=" + dates +
                 '}';
     }
@@ -124,7 +124,7 @@ public class Calendar implements Serializable {
 
         @Override
         public String toString() {
-            return "Date{" +
+            return getClass().getSimpleName()+"{" +
                     "date=" + date +
                     ", nameOfHoliday='" + nameOfHoliday + '\'' +
                     '}';

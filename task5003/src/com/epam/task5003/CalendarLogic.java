@@ -1,6 +1,7 @@
 package com.epam.task5003;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 public class CalendarLogic {
     private Calendar calendar;
@@ -11,6 +12,10 @@ public class CalendarLogic {
         } else{
             this.calendar=new Calendar();
         }
+    }
+
+    public Set<Calendar.Date> getDates(){
+        return calendar.getDates();
     }
 
     public void addDate(LocalDate date) {
