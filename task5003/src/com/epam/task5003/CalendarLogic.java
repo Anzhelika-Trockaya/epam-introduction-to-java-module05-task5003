@@ -4,43 +4,57 @@ import java.time.LocalDate;
 import java.util.Set;
 
 public class CalendarLogic {
-    private Calendar calendar;
 
-    public CalendarLogic(Calendar calendar) {
-        if(calendar!=null) {
-            this.calendar = calendar;
-        } else{
-            this.calendar=new Calendar();
+    public CalendarLogic() {
+    }
+
+    public Set<Calendar.Date> getDates(Calendar calendar) throws CalendarLogicException {
+        if (calendar != null) {
+            return calendar.getDates();
+        } else {
+            throw new CalendarLogicException("Calendar is null!");
         }
     }
 
-    public Set<Calendar.Date> getDates(){
-        return calendar.getDates();
-    }
-
-    public void addDate(LocalDate date) {
-        calendar.getDates().add(new Calendar.Date(date));
-    }
-
-    public void addDate(LocalDate date, String nameOfHoliday) {
-        calendar.getDates().add(new Calendar.Date(date, nameOfHoliday));
-    }
-
-    public void deleteDate(LocalDate date) {
-        for (Calendar.Date currentDate : calendar.getDates()) {
-            if (currentDate.getDate().equals(date)) {
-                calendar.getDates().remove(currentDate);
-                break;
-            }
+    public void addDate(Calendar calendar, LocalDate date) throws CalendarLogicException {
+        if (calendar != null) {
+            calendar.getDates().add(new Calendar.Date(date));
+        } else {
+            throw new CalendarLogicException("Calendar is null!");
         }
     }
 
-    public void deleteDate(String nameOfHoliday) {
-        for (Calendar.Date currentDate : calendar.getDates()) {
-            if (currentDate.getNameOfHoliday().equals(nameOfHoliday)) {
-                calendar.getDates().remove(currentDate);
-                break;
+    public void addDate(Calendar calendar, LocalDate date, String nameOfHoliday) throws CalendarLogicException {
+        if (calendar != null) {
+            calendar.getDates().add(new Calendar.Date(date, nameOfHoliday));
+        } else {
+            throw new CalendarLogicException("Calendar is null!");
+        }
+    }
+
+    public void deleteDate(Calendar calendar, LocalDate date) throws CalendarLogicException {
+        if (calendar != null) {
+            for (Calendar.Date currentDate : calendar.getDates()) {
+                if (currentDate.getDate().equals(date)) {
+                    calendar.getDates().remove(currentDate);
+                    break;
+                }
             }
+        } else {
+            throw new CalendarLogicException("Calendar is null!");
+        }
+    }
+
+    public void deleteDate(Calendar calendar, String nameOfHoliday) throws CalendarLogicException {
+        if (calendar != null) {
+            for (Calendar.Date currentDate : calendar.getDates()) {
+                if (currentDate.getNameOfHoliday().equals(nameOfHoliday)) {
+                    calendar.getDates().remove(currentDate);
+                    break;
+                }
+            }
+        } else {
+            throw new CalendarLogicException("Calendar is null!");
         }
     }
 }

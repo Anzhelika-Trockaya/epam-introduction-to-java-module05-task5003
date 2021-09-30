@@ -14,20 +14,24 @@ public class Main {
 
         myCalendar = new Calendar();
 
-        logic = new CalendarLogic(myCalendar);
+        logic = new CalendarLogic();
         view = new CalendarView();
 
-        logic.addDate(LocalDate.of(2021, 3, 8), "Woman Day");
-        logic.addDate(LocalDate.of(2021, 1, 1), "New Year");
-        logic.addDate(LocalDate.of(2021, 12, 25), "Christmas");
-        logic.addDate(LocalDate.of(2021, 4, 1), "1 April");
+        try {
+            logic.addDate(myCalendar, LocalDate.of(2021, 3, 8), "Woman Day");
+            logic.addDate(myCalendar, LocalDate.of(2021, 1, 1), "New Year");
+            logic.addDate(myCalendar, LocalDate.of(2021, 12, 25), "Christmas");
+            logic.addDate(myCalendar, LocalDate.of(2021, 4, 1), "1 April");
 
-        view.printDates(logic.getDates());
+            view.printDates(logic.getDates(myCalendar));
 
-        logic.deleteDate(LocalDate.of(2021, 3, 8));
-        logic.deleteDate("1 April");
-        logic.addDate(LocalDate.of(2021, 4, 25));
+            logic.deleteDate(myCalendar, LocalDate.of(2021, 3, 8));
+            logic.deleteDate(myCalendar, "1 April");
+            logic.addDate(myCalendar, LocalDate.of(2021, 4, 25));
 
-        view.printDates(logic.getDates());
+            view.printDates(logic.getDates(myCalendar));
+        } catch (CalendarLogicException exception) {
+            System.out.println("Error! " + exception.getMessage());
+        }
     }
 }
